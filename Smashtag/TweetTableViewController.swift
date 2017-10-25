@@ -17,7 +17,7 @@ class TweetTableViewController: UITableViewController, UISplitViewControllerDele
             print(tweets)
         }
     }
-    var recents = [String]() //UserDefaults.standard.array(forKey: "recentSearches") ?? [String]()
+    var recents = UserDefaults.standard.array(forKey: "recentSearches") ?? [String]()
     
     var searchText: String? {
         didSet {
@@ -28,7 +28,10 @@ class TweetTableViewController: UITableViewController, UISplitViewControllerDele
             tableView.reloadData()
             searchForTweets()
             title = searchText
+            
+            recents = recents.removeDuplicates(with: searchText)                //removes duplicates case insensitively
             recents.insert(searchText!, at: 0)
+            recents = recents.cap(recents, at: 100)                             //caps array at 100 items
             UserDefaults.standard.set(recents, forKey: "recentSearches")       //
         }
     }
@@ -156,4 +159,36 @@ extension UIViewController {
         }
     }
 }
+
+extension Array {
+    func removeDuplicates (with text: String?) -> [String] {
+        var initialArray = self as! [String]
+        var result = initialArray
+        var n = 0
+        
+        guard (initialArray.count > 0) && (text != nil) else {
+            return [String]()
+        }
+        
+        for index in (0..<initialArray.count) {
+            let item = initialArray[index]
+            if (item.caseInsensitiveCompare(text!) == .orderedSame) {
+                result.remove(at: index-n)
+                n += 1
+            }
+        }
+        return result
+    }
+    
+    func cap(_ array: Array, at capNumber: Int) -> Array {
+        var cappedArray = array
+        let itemCount = array.count
+        
+        if itemCount > capNumber {
+            cappedArray = Array(cappedArray.dropLast(itemCount - capNumber))
+        }
+        return cappedArray
+    }
+}
+
 

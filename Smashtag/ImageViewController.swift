@@ -46,6 +46,11 @@ class ImageViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollingView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)              //fix elevated bottom scrolling
+    }
+    
     // User Interface
     @IBOutlet weak var scrollingView: UIScrollView! {
         didSet {

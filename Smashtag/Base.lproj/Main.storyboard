@@ -120,15 +120,15 @@
                         <viewControllerLayoutGuide type="top" id="3MF-kN-Ovu"/>
                         <viewControllerLayoutGuide type="bottom" id="3Hb-jG-n1Y"/>
                     </layoutGuides>
-                    <view key="view" clipsSubviews="YES" contentMode="scaleAspectFill" id="lxH-RV-5at">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" id="lxH-RV-5at">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="hd3-f8-ME2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="505"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-If-oUL">
-                                        <rect key="frame" x="169" y="283" width="37" height="37"/>
+                                        <rect key="frame" x="169" y="234" width="37" height="37"/>
                                         <color key="color" red="0.35590590919999998" green="0.7501686273" blue="0.91967401650000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -386,6 +386,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3IG-CL-N4s"/>
+        <segue reference="Yfl-K2-FVC"/>
     </inferredMetricsTieBreakers>
 </document>
