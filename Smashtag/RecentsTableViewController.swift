@@ -23,7 +23,7 @@ class RecentsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let indexPath = tableView.indexPath(for: (sender as! UITableViewCell))
-        if let tweetTVC = (segue.destination.contents as? TweetTableViewController) {
+        if let tweetTVC = (segue.destination.contents as? SmashTweetTableViewController) {
             tweetTVC.searchText = recents[indexPath!.row]
         }
     }

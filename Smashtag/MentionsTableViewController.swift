@@ -36,7 +36,7 @@ class MentionsTableViewController: UITableViewController {
                 imageVC.aspectRatio = tweet.media[indexPath!.row].aspectRatio
             }
         } else if identifier == "mentionCell" {
-            if let tweetTVC = (segue.destination.contents as? TweetTableViewController) {
+            if let tweetTVC = (segue.destination.contents as? SmashTweetTableViewController) {  
                 if indexPath?.section == 1 {
                     tweetTVC.searchText = tweet.hashtags[(indexPath?.row)!].keyword
                 } else {

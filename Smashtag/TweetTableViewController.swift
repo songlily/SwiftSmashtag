@@ -36,6 +36,11 @@ class TweetTableViewController: UITableViewController, UISplitViewControllerDele
         }
     }
     
+    /*internal*/ func insertTweets (_ newTweets: [Twitter.Tweet]) {
+        self.tweets.insert(newTweets, at:0)
+        self.tableView.insertSections([0], with: .fade)
+    }
+    
     // Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -75,8 +80,7 @@ class TweetTableViewController: UITableViewController, UISplitViewControllerDele
             request.fetchTweets { [weak self] newTweets in // this is off the main queue
                 DispatchQueue.main.async { // so dispatch back to main queue
                     if request == self?.lastTwitterRequest {
-                        self?.tweets.insert(newTweets, at:0)
-                        self?.tableView.insertSections([0], with: .fade)
+                        self?.insertTweets(newTweets)
                     }
                     self?.refreshControl?.endRefreshing()   // end refreshing
                 }
