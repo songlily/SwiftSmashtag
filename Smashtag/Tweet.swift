@@ -31,6 +31,33 @@ class Tweet: NSManagedObject {
         tweet.text = twitterInfo.text
         tweet.created = twitterInfo.created as NSDate
         tweet.tweeter = try? TwitterUser.findOrCreateTwitterUser(matching: twitterInfo.user, in: context)
+
+        if twitterInfo.hashtags.count != 0 {
+            for item in twitterInfo.hashtags {
+                let mention = try Mention.findOrCreateMention(matching: item, in: context)
+                for men in tweet.mentions! {
+                    if (men as! Mention).keyword!.lowercased() == mention?.keyword?.lowercased() {
+                        tweet.removeFromMentions((men as! Mention))
+                    }
+                }
+                if mention != nil {
+                    tweet.addToMentions(mention!)
+                }
+            }
+        }
+        if twitterInfo.userMentions.count != 0 {
+            for item in twitterInfo.userMentions {
+                let mention = try Mention.findOrCreateMention(matching: item, in: context)
+                for men in tweet.mentions! {
+                    if (men as! Mention).keyword!.lowercased() == mention?.keyword?.lowercased() {
+                        tweet.removeFromMentions((men as! Mention))
+                    }
+                }
+                if mention != nil {
+                    tweet.addToMentions(mention!)
+                }
+            }
+        }
         
         return tweet
     }

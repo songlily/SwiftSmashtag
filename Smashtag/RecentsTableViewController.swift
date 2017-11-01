@@ -15,7 +15,7 @@ class RecentsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recents = UserDefaults.standard.array(forKey: "recentSearches") as! [String]
+        recents = (UserDefaults.standard.array(forKey: "recentSearches") as? [String]) 
         tableView.reloadData()
     }
 
@@ -23,9 +23,17 @@ class RecentsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let indexPath = tableView.indexPath(for: (sender as! UITableViewCell))
-        if let tweetTVC = (segue.destination.contents as? SmashTweetTableViewController) {
-            tweetTVC.searchText = recents[indexPath!.row]
+        if segue.identifier == "recentSearchCell" {
+            if let tweetTVC = (segue.destination.contents as? SmashTweetTableViewController) {
+                tweetTVC.searchText = recents[indexPath!.row]
+            }
+        } else if segue.identifier == "popularMentions" {
+            if let pmTVC = segue.destination.contents as? PopularMentionsTableViewController {
+                pmTVC.mention = recents[indexPath!.row]
+                pmTVC.container = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+            }
         }
+        
     }
 
     // MARK: - Table view data source
